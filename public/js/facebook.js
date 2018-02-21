@@ -21,13 +21,17 @@ $(document).ready(function(){
 	$('.checkFriends').on('click', function (){
 		allFreindsArray = getAllList();
 		$.ajax({
-			url: "/showDeletedFriends",
+			url: "/checkFriends",
 			type: "POST",
 			data: {
 				_token:  $('.token').text().trim(),
 				allFreindsList:  allFreindsArray
 					},
 			success: function(data) {
+				$('.showDeletedFriendsList').show();
+				for(let i = 0; i < data.length; i++){
+					$('.deletedFriendName').append('<p>'+data[i]+'</p>');
+				}
 				alert('Success');
 			},
 			error: function (xhr, status, error) {

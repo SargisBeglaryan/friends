@@ -16,13 +16,12 @@ class FacebookController extends Controller
 		    'Success'
 		]);
     }
-    public function showDeletedFriends(){
-        $friendsObject =Facebook::select('full_name')->get();
-        $friendsList = $friendsObject->toArray();
+    public function showDeletedFriends(Request $request){
+        $friendsList =Facebook::select('full_name')->pluck('full_name')->toArray();
         $deletedFriends = [];
-        for($i = 0; $i < count($request->allFreindsList); $i++){
-            if(in_array($request->allFreindsList[$i], $friendsList){
-                array_push($deletedFriends, $request->allFreindsList[$i]);
+        for($i = 0; $i < count($friendsList); $i++){
+            if(!in_array($friendsList[$i], $request->allFreindsList)){
+                array_push($deletedFriends, $friendsList[$i]);
             }
         }
         return response()->json([

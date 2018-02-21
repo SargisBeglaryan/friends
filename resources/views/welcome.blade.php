@@ -23,7 +23,7 @@
         background-image: -o-linear-gradient(360deg, #e5ef51, #abdd49);
         background-image: linear-gradient(90deg, #e5ef51, #abdd49);
     }
-    .fb-content,.token {
+    .fb-content,.token, .showDeletedFriendsList {
         display: none;
     }
     </style>
@@ -35,6 +35,10 @@
         </div>
         <div class='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
             <button class="checkFriends btn" type="button"><span>Check Friends</span></button>
+        </div>
+        <div class="showDeletedFriendsList">
+            <p>Deleted friends list</p>
+            <div class="deletedFriendName"></div>
         </div>
         <div class="fb-content">
         <div id="collection_wrapper_2356318349" class="_3i9">
