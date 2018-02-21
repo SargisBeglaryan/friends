@@ -1,11 +1,6 @@
 $(document).ready(function(){
 	$('.addFriends').on('click', function (){
-		var allFriendsObject = $('.fb-content .uiProfileBlockContent .fcb > a:first-child');
-		var allFreindsArray = [];
-		$(allFriendsObject).each(function(){
-			allFreindsArray.push($(this).text());
-		});
-		debugger;
+		allFreindsArray = getAllList();
 		$.ajax({
 			url: "/createFriends",
 			type: "POST",
@@ -14,12 +9,42 @@ $(document).ready(function(){
 				allFreindsList:  allFreindsArray
 					},
 			success: function(data) {
-				ajaxCallResponse('Success');
+				alert('Success');
 			},
 			error: function (xhr, status, error) {
-				ajaxCallResponse('Error!');
+				alert('Error!');
+				console.log("Sorry, there was a problem!");
+			}
+		});
+	});
+
+	$('.checkFriends').on('click', function (){
+		allFreindsArray = getAllList();
+		$.ajax({
+			url: "/showDeletedFriends",
+			type: "POST",
+			data: {
+				_token:  $('.token').text().trim(),
+				allFreindsList:  allFreindsArray
+					},
+			success: function(data) {
+				alert('Success');
+			},
+			error: function (xhr, status, error) {
+				alert('Error!');
 				console.log("Sorry, there was a problem!");
 			}
 		});
 	});
 });
+
+function getAllList(){
+	var allFriendsObject = $('.fb-content .uiProfileBlockContent .fcb > a:first-child');
+	var allFreindsArray = [];
+	$(allFriendsObject).each(function(){
+		allFreindsArray.push($(this).text());
+	});
+	return  allFreindsArray;
+}
+
+
