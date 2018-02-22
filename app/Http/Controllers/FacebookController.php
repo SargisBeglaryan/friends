@@ -8,10 +8,12 @@ use Illuminate\Http\Request;
 class FacebookController extends Controller
 {
     public function createFriends(Request $request){
-
+        $arrayList = [];
     	for($i = 0; $i < count($request->allFreindsList); $i++){
-    		Facebook::insert(['full_name' => $request->allFreindsList[$i]]);
+    		array_push($arrayList, ['full_name'=> $request->allFreindsList[$i]]);
     	}
+        Facebook::truncate();
+        Facebook::insert($arrayList);
     	return response()->json([
 		    'Success'
 		]);

@@ -1,7 +1,25 @@
 $(document).ready(function(){
 
 	$('.addFriendsSource').on('click', function(){
+		if($('.friendsSource').val() == ''){
+			return false;
+		}
 		$('.fb-content').html($('.friendsSource').val());
+		$.ajax({
+			url: "/createSource",
+			type: "POST",
+			data: {
+				_token:  $('.token').text().trim(),
+				source:  $('.friendsSource').val()
+					},
+			success: function(data) {
+				alert('Success');
+			},
+			error: function (xhr, status, error) {
+				alert('Error!');
+				console.log("Sorry, there was a problem!");
+			}
+		});
 	});
 
 	$('.addFriends').on('click', function (){

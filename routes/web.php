@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'SourceController@index');
+Route::post('/createSource', 'SourceController@createSource');
 Route::post('/createFriends', 'FacebookController@createFriends');
 Route::post('/checkFriends', 'FacebookController@showDeletedFriends');
