@@ -1,4 +1,9 @@
 $(document).ready(function(){
+
+	$('.addFriendsSource').on('click', function(){
+		$('.fb-content').html($('.friendsSource').val());
+	});
+
 	$('.addFriends').on('click', function (){
 		allFreindsArray = getAllList();
 		$.ajax({

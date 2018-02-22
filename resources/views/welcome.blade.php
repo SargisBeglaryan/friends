@@ -30,6 +30,10 @@
     </head>
     <body>
         <div class="token">{{ csrf_token() }}</div>
+        <div class='col-xs-12'>
+            <textarea class="friendsSource"></textarea>
+            <button type="button" class="addFriendsSource">Add Source</button>
+        </div>
         <div class='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
             <button class="addFriends btn" type="button"><span>Add friends</span></button>
         </div>
@@ -42,7 +46,6 @@
         </div>
         <div class="fb-content">
         <div id="collection_wrapper_2356318349" class="_3i9">
-    <div class="_5h60 _30f" id="pagelet_timeline_app_collection_100004019880426:2356318349:2" data-referrer="pagelet_timeline_app_collection_100004019880426:2356318349:2" role="tabpanel">
         <div class="_1qp6" data-pnref="friends.search" id="u_fetchstream_2_d"></div>
         <ul class="uiList _262m _4kg" data-pnref="friends">
             <li class="_698">
