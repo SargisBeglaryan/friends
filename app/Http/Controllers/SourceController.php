@@ -9,7 +9,7 @@ class SourceController extends Controller
 {
     public function index()
     {
-    	$source = Source::select('source')->latest()->first();
+    	$source = Source::select('source')->orderBy('id', 'desc')->first();
     	return view('welcome')->with('source', $source);
     }
 

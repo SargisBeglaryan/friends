@@ -30,9 +30,10 @@
     </head>
     <body>
         <div class="token">{{ csrf_token() }}</div>
-        <div class='col-xs-12'>
-            <textarea class="friendsSource"></textarea>
-            <button type="button" class="addFriendsSource">Add Source</button>
+        <div class='col-xs-12 text-center'>
+            <textarea class="friendsSource"></textarea><br>
+            <button type="button" class="addFriendsSource" data-condition="add-database">Add Source</button>
+            <button type="button" class="checkFriendsSource" data-condition="check">Check Source</button>
         </div>
         <div class='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
             <button class="addFriends btn" type="button"><span>Add friends</span></button>
@@ -40,12 +41,16 @@
         <div class='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
             <button class="checkFriends btn" type="button"><span>Check Friends</span></button>
         </div>
-        <div class="showDeletedFriendsList">
-            <p>Deleted friends list</p>
-            <div class="deletedFriendName"></div>
+        <div class='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
+            <div class="showDeletedFriendsList">
+                <p>Deleted friends list</p>
+                <div class="deletedFriendName"></div>
+            </div>
         </div>
         <div class="fb-content">
-            {!! $source->source !!}
+            @if($source != null)
+                {!! $source->source !!}
+            @endif
         </div>
 
     <script src="{{asset('js/facebook.js')}}"></script>
