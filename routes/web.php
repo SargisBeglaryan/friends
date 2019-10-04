@@ -13,5 +13,7 @@
 
 Route::get('/', 'SourceController@index');
 Route::post('/createSource', 'SourceController@createSource');
-Route::post('/createFriends', 'FacebookController@createFriends');
-Route::post('/checkFriends', 'FacebookController@showDeletedFriends');
+Route::post('/createFriends/facebook', 'SocialNetworkController@createFacebookFriends');
+Route::post('/createFriends/instagram', 'SocialNetworkController@createInstagramFriends');
+Route::post('/checkFriends/facebook', 'SocialNetworkController@showFacebookDeletedFriends');
+Route::post('/checkFriends/instagram', 'SocialNetworkController@showInstagramDeletedFriends');

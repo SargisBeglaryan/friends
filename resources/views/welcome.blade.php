@@ -36,10 +36,12 @@
             <button type="button" class="checkFriendsSource" data-condition="check">Check Source</button>
         </div>
         <div class='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
-            <button class="addFriends btn" type="button"><span>Add friends</span></button>
+            <button class="addFriends btn" data-social="facebook" type="button"><span>Add facebook friends</span></button><br><br>
+            <button class="addFriends btn" data-social="instagram" type="button"><span>Add instagram friends</span></button>
         </div>
         <div class='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
-            <button class="checkFriends btn" type="button"><span>Check Friends</span></button>
+            <button class="checkFriends btn" data-social="facebook" type="button"><span>Check Facebook Friends</span></button><br><br>
+            <button class="checkFriends btn" data-social="instagram" type="button"><span>Check Instagram Friends</span></button>
         </div>
         <div class='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
             <div class="showDeletedFriendsList">

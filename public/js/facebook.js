@@ -26,8 +26,9 @@ $(document).ready(function(){
 
 	$('.addFriends').on('click', function (){
 		allFreindsArray = getAllList();
+		let socialNetwork = $(this).data('social');
 		$.ajax({
-			url: "/createFriends",
+			url: "/createFriends/"+socialNetwork,
 			type: "POST",
 			data: {
 				_token:  $('.token').text().trim(),
@@ -44,9 +45,10 @@ $(document).ready(function(){
 	});
 
 	$('.checkFriends').on('click', function (){
-		allFreindsArray = getAllList();
+		let socialNetwork = $(this).data('social');
+		allFreindsArray = getAllList(socialNetwork);
 		$.ajax({
-			url: "/checkFriends",
+			url: "/checkFriends/"+ socialNetwork,
 			type: "POST",
 			data: {
 				_token:  $('.token').text().trim(),
@@ -67,8 +69,12 @@ $(document).ready(function(){
 	});
 });
 
-function getAllList(){
-	var allFriendsObject = $('.fb-content .uiProfileBlockContent .fcb > a:first-child');
+function getAllList(socialNetwork){
+	if(socialNetwork == 'facebook') {
+		var allFriendsObject = $('.fb-content .uiProfileBlockContent .fcb > a:first-child');
+	} else {
+		var allFriendsObject = $('.fb-content .wo9IH a');
+	}
 	var allFreindsArray = [];
 	$(allFriendsObject).each(function(){
 		allFreindsArray.push($(this).text());
