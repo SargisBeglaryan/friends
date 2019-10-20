@@ -25,8 +25,8 @@ $(document).ready(function(){
 	});
 
 	$('.addFriends').on('click', function (){
-		allFreindsArray = getAllList();
 		let socialNetwork = $(this).data('social');
+		allFreindsArray = getAllList(socialNetwork);
 		$.ajax({
 			url: "/createFriends/"+socialNetwork,
 			type: "POST",
