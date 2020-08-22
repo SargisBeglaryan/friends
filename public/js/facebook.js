@@ -71,7 +71,7 @@ $(document).ready(function(){
 
 function getAllList(socialNetwork){
 	if(socialNetwork == 'facebook') {
-		var allFriendsObject = $('.fb-content .uiProfileBlockContent .fcb > a:first-child');
+		var allFriendsObject = $('.fb-content .i1fnvgqd .bp9cbjyn .buofh1pr  a .oi732d6d');
 	} else {
 		var allFriendsObject = $('.fb-content .wo9IH a');
 	}
