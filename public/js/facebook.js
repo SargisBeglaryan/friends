@@ -71,8 +71,8 @@ $(document).ready(function(){
 
 function getAllList(socialNetwork){
 	if(socialNetwork == 'facebook') {
-		var activefriendsObject = $('.fb-content .i1fnvgqd .bp9cbjyn .buofh1pr a .oi732d6d');
-		var allFriendsObject = activefriendsObject.add($('.fb-content .i1fnvgqd .bp9cbjyn .buofh1pr > .oi732d6d'));
+		var activefriendsObject = $('.fb-content .i1fnvgqd .bp9cbjyn .buofh1pr a .d2edcug0');
+		var allFriendsObject = activefriendsObject.add($('.fb-content .i1fnvgqd .bp9cbjyn .buofh1pr  div:not(.aahdfvyu) > .d2edcug0'));
 	} else {
 		var allFriendsObject = $('.fb-content .wo9IH a');
 	}
