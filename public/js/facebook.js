@@ -45,6 +45,7 @@ $(document).ready(function(){
 	});
 
 	$('.checkFriends').on('click', function (){
+		debugger;
 		let socialNetwork = $(this).data('social');
 		allFreindsArray = getAllList(socialNetwork);
 		$.ajax({
@@ -71,8 +72,10 @@ $(document).ready(function(){
 
 function getAllList(socialNetwork){
 	if(socialNetwork == 'facebook') {
-		var activefriendsObject = $('.fb-content .i1fnvgqd .bp9cbjyn .buofh1pr a .d2edcug0');
-		var allFriendsObject = activefriendsObject.add($('.fb-content .i1fnvgqd .bp9cbjyn .buofh1pr  div:not(.aahdfvyu) > .d2edcug0'));
+		debugger;
+		var activefriendsObject = $('.fb-content .x9f619 .x1yztbdb .x6s0dn4 .x1iyjqo2.x1pi30zi a .x193iq5w');
+		var allFriendsObject = activefriendsObject.add($('.fb-content .x9f619 .x1yztbdb .x6s0dn4 .x1iyjqo2.x1pi30zi     div.x1i10hfl .x193iq5w'));
+		// var allFriendsObject = activefriendsObject;
 	} else {
 		var allFriendsObject = $('.fb-content .wo9IH a');
 	}
