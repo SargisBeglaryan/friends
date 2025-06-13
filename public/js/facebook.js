@@ -73,8 +73,8 @@ $(document).ready(function(){
 function getAllList(socialNetwork){
 	if(socialNetwork == 'facebook') {
 		debugger;
-		var activefriendsObject = $('.fb-content .x9f619 .x1yztbdb .x6s0dn4 .x1iyjqo2.x1pi30zi a .x193iq5w');
-		var allFriendsObject = activefriendsObject.add($('.fb-content .x9f619 .x1yztbdb .x6s0dn4 .x1iyjqo2.x1pi30zi     div.x1i10hfl .x193iq5w'));
+		var activefriendsObject = $('.fb-content .x9f619 .x1yztbdb .x6s0dn4 .x1iyjqo2 a .x193iq5w');
+		var allFriendsObject = activefriendsObject.add($('.fb-content .x9f619 .x1yztbdb .x6s0dn4 .x1iyjqo2     div.x1i10hfl .x193iq5w'));
 		// var allFriendsObject = activefriendsObject;
 	} else {
 		var allFriendsObject = $('.fb-content .wo9IH a');
