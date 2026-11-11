@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -23,13 +24,12 @@
         background-image: -o-linear-gradient(360deg, #e5ef51, #abdd49);
         background-image: linear-gradient(90deg, #e5ef51, #abdd49);
     }
-    .fb-content,.token, .showDeletedFriendsList {
+    .showDeletedFriendsList {
         display: none;
     }
     </style>
     </head>
     <body>
-        <div class="token">{{ csrf_token() }}</div>
         <div class='col-xs-12 text-center'>
             <textarea class="friendsSource"></textarea><br>
             <button type="button" class="addFriendsSource" data-condition="add-database">Add Source</button>
@@ -49,11 +49,9 @@
                 <div class="deletedFriendName"></div>
             </div>
         </div>
-        <div class="fb-content">
-            @if($source != null)
-                {!! $source->source !!}
-            @endif
-        </div>
-
-    <script src="{{asset('js/facebook.js')}}"></script>
+        {{-- Saved HTML is passed as data and parsed in an inert document (see facebook.js),
+             so its images are never downloaded and its scripts never run. --}}
+        <script>window.savedFriendsSource = @json($source ?? '');</script>
+        <script src="{{asset('js/facebook.js')}}"></script>
+    </body>
 </html>

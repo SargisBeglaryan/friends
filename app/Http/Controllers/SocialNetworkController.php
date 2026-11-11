@@ -1,65 +1,64 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Facebook as Facebook;
-use App\Instagram as Instagram;
 
+use App\Facebook;
+use App\Instagram;
 use Illuminate\Http\Request;
 
 class SocialNetworkController extends Controller
 {
-    public function createFacebookFriends(Request $request){
-        $arrayList = [];
-    	for($i = 0; $i < count($request->allFreindsList); $i++){
-    		array_push($arrayList, ['full_name'=> $request->allFreindsList[$i]]);
-    	}
-        Facebook::truncate();
-        Facebook::insert($arrayList);
-    	return response()->json([
-		    'Success'
-		]);
+    /** Rows per INSERT query, keeps us well under MySQL placeholder/packet limits. */
+    private const INSERT_CHUNK = 500;
+
+    private const MODELS = [
+        'facebook'  => Facebook::class,
+        'instagram' => Instagram::class,
+    ];
+
+    public function createFriends(Request $request, string $network)
+    {
+        $model = self::MODELS[$network];
+
+        $rows = array_map(
+            fn ($name) => ['full_name' => $name],
+            $this->friendsFromRequest($request)
+        );
+
+        $model::truncate();
+        foreach (array_chunk($rows, self::INSERT_CHUNK) as $chunk) {
+            $model::insert($chunk);
+        }
+
+        return response()->json(['Success']);
     }
 
-    public function showFacebookDeletedFriends(Request $request){
-        $friendsList =Facebook::select('full_name')->pluck('full_name')->toArray();
-        $deletedFriends = [];
-        for($i = 0; $i < count($friendsList); $i++){
-            if(!in_array($friendsList[$i], $request->allFreindsList)){
-                array_push($deletedFriends, $friendsList[$i]);
-            }
-        }
-        return response()->json([
-            $deletedFriends
-        ]);
+    public function showDeletedFriends(Request $request, string $network)
+    {
+        $model = self::MODELS[$network];
 
+        $savedFriends = $model::pluck('full_name')->all();
+        $currentFriends = array_flip($this->friendsFromRequest($request));
+
+        // Hash lookup: O(n + m) instead of in_array's O(n * m).
+        $deletedFriends = array_values(array_filter(
+            $savedFriends,
+            fn ($name) => !isset($currentFriends[trim($name)])
+        ));
+
+        return response()->json($deletedFriends);
     }
 
-    public function createInstagramFriends(Request $request){
-        $arrayList = [];
-        for($i = 0; $i < count($request->allFreindsList); $i++){
-            if($request->allFreindsList[$i] != '') {
-                array_push($arrayList, ['full_name'=> $request->allFreindsList[$i]]);
-            }
-        }
-        
-        Instagram::truncate();
-        Instagram::insert($arrayList);
-        return response()->json([
-            'Success'
-        ]);
-    }
+    /**
+     * @return string[] non-empty, trimmed friend names
+     */
+    private function friendsFromRequest(Request $request): array
+    {
+        $list = (array) $request->input('allFreindsList', []);
 
-    public function showInstagramDeletedFriends(Request $request){
-        $friendsList =Instagram::select('full_name')->pluck('full_name')->toArray();
-        $deletedFriends = [];
-        for($i = 0; $i < count($friendsList); $i++){
-            if(!in_array($friendsList[$i], $request->allFreindsList)){
-                array_push($deletedFriends, $friendsList[$i]);
-            }
-        }
-        return response()->json([
-            $deletedFriends
-        ]);
-
+        return array_values(array_filter(
+            array_map(fn ($name) => trim((string) $name), $list),
+            fn ($name) => $name !== ''
+        ));
     }
 }
